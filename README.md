@@ -18,39 +18,55 @@ Add `gem 'middleman-zip'` to your project's `Gemfile` and run `bundle install`.
 Add the following to the `config.rb` of your Middleman project:
 
 ```ruby
-activate :middleman_zip, input_dir: 'build', output_file: 'pkg/build.zip',
-                         include_root: true, moment: :after
-
-# or
-
-activate :middleman_zip do |config|
-  config.input_dir: 'build'
-  config.output_file: 'pkg/build.zip'
-  config.include_root: true
-  config.moment: :after
-end
+activate :zip, output_file: 'pkg/archive.zip'
 ```
 
 ### Options
 
 ```ruby
-:input_dir    => 'build'         # The directory that will be zipped.
-                                 # String. Default: 'build' (or whatever you 
-                                 # specified as your build directory).
+:input_dir    => 'build' # The directory that will be zipped.
+                         # String. Default: 'build' (or whatever you specified
+                         # as your build directory).
 
-:output_file  => 'pkg/build.zip' # Path to the final zip file.
-                                 # String, has to end with '.zip'.
-                                 # Default: 'pkg/build.zip'.
+:output_file  => nil     # Path to the final zip file.
+                         # String, has to end with '.zip'.
+                         # Required if :zip_map option is not set.
 
-:include_root => true            # Whether to include or not to include a
-                                 # root directory. If a string is provided it
-                                 # will be used as directory name.
-                                 # Boolean (true/false) or string. 
-                                 # Default: true.
+:include_root => true    # Whether to include or not to include a root
+                         # directory. If a string is provided it will be used
+                         # as directory name.
+                         # Boolean (true/false) or string. Default: true.
 
-:moment       => :after          # Whether to zip files before or after build.
-                                 # Symbol, possible values: :after, :before.
-                                 # Default: :after
+:moment       => :after  # Whether to zip files before or after build.
+                         # Symbol, possible values: :after, :before.
+                         # Default: :after
+
+:zip_map      => nil     # Array of hashed, each hash with optional :input_dir,
+                         # :include_root and :moment keys and required
+                         # :output_file key. See above for allowed values.
+                         # Array of hashed, Required if :output_file option
+                         # is not set.
+```
+
+Example with `:zip_map` option:
+
+```ruby
+activate :zip, zip_map: [
+  { output_file: 'pkg/archive.zip' },
+  { input_dir: 'additional_files', output_file: 'pkg/additionals.zip' }
+]
+```
+
+Options can be set in two ways:
+
+```ruby
+activate :middleman_zip, output_file: 'pkg/build.zip'
+
+# or
+
+activate :middleman_zip do |config|
+  config.output_file: 'pkg/build.zip'
+end
 ```
 
 ## Changelog

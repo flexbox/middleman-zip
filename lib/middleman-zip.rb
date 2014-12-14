@@ -1,7 +1,5 @@
 require 'middleman-core'
 require 'middleman-zip/version'
+require 'middleman-zip/extension'
 
-::Middleman::Extensions.register(:middleman_zip) do
-  require 'middleman-zip/extension'
-  Middleman::Zip::ZipExtension
-end
+Middleman::Extensions.register(:zip, Middleman::Zip::ZipExtension)
