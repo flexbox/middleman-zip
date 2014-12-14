@@ -60,11 +60,11 @@ activate :zip, zip_map: [
 Options can be set in two ways:
 
 ```ruby
-activate :middleman_zip, output_file: 'pkg/build.zip'
+activate :zip, output_file: 'pkg/build.zip'
 
 # or
 
-activate :middleman_zip do |config|
+activate :zip do |config|
   config.output_file: 'pkg/build.zip'
 end
 ```
