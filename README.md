@@ -65,7 +65,7 @@ activate :zip, output_file: 'pkg/build.zip'
 # or
 
 activate :zip do |config|
-  config.output_file: 'pkg/build.zip'
+  config.output_file = 'pkg/build.zip'
 end
 ```
 
